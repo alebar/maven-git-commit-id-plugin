@@ -153,6 +153,20 @@ public class GitDescribeConfig {
    */
   private boolean forceLongFormat = false;
 
+  /**
+   * This parameter can be used to directly define arguments that should be passed to <pre>git-describe</pre> command,
+   * when running in native mode (ie when {@link pl.project13.maven.git.GitCommitIdMojo#useNativeGit} is set to {@code 'true'}).
+   *
+   * If this property is not null then it's entire content will be appended to executed command, without any validation.
+   *
+   * This param has no effect when {@link pl.project13.maven.git.GitCommitIdMojo#useNativeGit} is {@code 'false'}.
+   *
+   * <pre>null</pre> by default.
+   *
+   * @parameter default-value=null
+   */
+  private String nativeArgs;
+
   public GitDescribeConfig() {
   }
 
@@ -221,6 +235,14 @@ public class GitDescribeConfig {
     this.tags = tags;
   }
 
+  public String getNativeArgs() {
+    return nativeArgs;
+  }
+
+  public void setNativeArgs(String nativeArgs) {
+    this.nativeArgs = nativeArgs;
+  }
+
   @Override
   public String toString() {
     return "GitDescribeConfig{" +
@@ -231,6 +253,7 @@ public class GitDescribeConfig {
         ", abbrev=" + abbrev +
         ", tags=" + tags +
         ", forceLongFormat=" + forceLongFormat +
+        ", nativeArgs='" + nativeArgs + '\'' +
         '}';
   }
 }

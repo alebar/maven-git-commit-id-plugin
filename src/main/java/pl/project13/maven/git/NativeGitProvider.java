@@ -116,6 +116,9 @@ public class NativeGitProvider extends GitDataProvider {
   private String getArgumentsForGitDescribe(GitDescribeConfig describeConfig) {
     if (describeConfig == null) return "";
 
+    if (describeConfig.getNativeArgs() != null && !describeConfig.getNativeArgs().isEmpty())
+      return " " + describeConfig.getNativeArgs();
+
     StringBuilder argumentsForGitDescribe = new StringBuilder();
 
     if (describeConfig.isAlways()) {

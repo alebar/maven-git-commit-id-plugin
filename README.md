@@ -381,6 +381,12 @@ It's really simple to setup this plugin; below is a sample pom that you may base
                              The distance will always be 0 if you're "on" the tag. 
                         -->
                         <forceLongFormat>false</forceLongFormat>
+                        
+                        <!--
+                             Pass this string as an argument of git describe command, when runnig Git in native mode (ie when useNativeGit is set to true).
+                             If this is not empty, then all other options are ignored and nativeArgs is used.
+                        -->
+                        <nativeArgs>--all --long --always</nativeArgs>
                     </gitDescribe>
                     <!-- @since 2.2.2 -->
                     <!-- 
@@ -803,6 +809,7 @@ Worth pointing out is, that git-commit-id tries to be 1-to-1 compatible with git
 * **long** - `(default: false)` git-describe, by default, returns just the tag name, if the current commit is tagged. Use this option to force it to format the output using the typical describe format. An example would be: `tagname-0-gc0ffebabe` - notice that the distance from the tag is 0 here, if you don't use **forceLongFormat** mode, the describe for such commit would look like this: `tagname`.
 * **always** - `(default: true)` if unable to find a tag, print out just the object id of the current commit. Useful when you always want to return something meaningful in the describe property.
 * **skip** - `(default: false)` when you don't use `git-describe` information in your build, you can opt to be calculate it.
+* **nativeArgs** - `(default: null)` pass this string directly as command line arguments of the `git-describe` command. Works only if `useNativeGit` is set to `true`. Will override all other options. Leave it empty to ignore it. 
 
 
 All options are documented in the code, so just use `ctrl + q` (intellij @ linux) or `f1` (intellij @ osx) when writing the options in pom.xml - you'll get examples and detailed information about each option (even more than here).
